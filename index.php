@@ -1,11 +1,14 @@
-<?php 
-ob_start(); 
-?>
-
-Ici la page d'accueil
-
 <?php
-$content = ob_get_clean();
-$titre = "Bibliothèque MGA";
-require "template.php";
-?>
+require_once "controllers/LivresController.controller.php";
+$livreController = new LivresController;
+
+if(empty($_GET["page"])){
+    require "views/accueil.view.php";
+}else{
+    switch($_GET["page"]){
+        case "accueil" : require "views/accueil.view.php";
+        break;
+        case "livres" : $livreController->afficherLivres();
+        break;
+    }
+}
